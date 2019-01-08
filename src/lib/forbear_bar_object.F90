@@ -199,7 +199,7 @@ contains
    class(bar_object), intent(inout) :: self !< Bar.
 
    if (self%add_scale_bar) call add_scale_bar
-   call self%update(current=self%min_value)
+   !call self%update(current=self%min_value)
    self%is_stdout_locked_ = .true.
    contains
       subroutine add_scale_bar()
