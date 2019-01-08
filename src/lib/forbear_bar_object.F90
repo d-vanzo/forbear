@@ -221,6 +221,7 @@ contains
    !< Update bar.
    class(bar_object), intent(inout)          :: self              !< Bar.
    real(R8P),         intent(in)             :: current           !< Current value.
+   real(R8P)                                 :: progress_real     !< Progress, in percent, real.
    integer(I4P)                              :: progress          !< Progress, in percent.
    integer(I4P), save                        :: progress_previous !< Previous progress, in percent.
    integer(I8P), save                        :: tic_toc(1:2)      !< Tic-toc timer.
@@ -234,6 +235,7 @@ contains
    character(len=1,  kind=UCS4), parameter   :: bar_end=char(13)  !< Last bar char, carriage return.
    character(len=:,  kind=UCS4), allocatable :: bar               !< Bar line.
 
+   progress_real = (current / (self%max_value - self%min_value) * 100.)
    progress = nint(current / (self%max_value - self%min_value) * 100)
    if (progress == 0) then
       progress_previous = 0
@@ -273,7 +275,7 @@ contains
       progress_previous = progress
       tic_toc(1) = tic_toc(2)
    endif
-   if (progress >= 100) then
+   if (progress_real >= 100) then
       if (self%add_date_time) then
          call date_and_time(date=date_time(1:8), time=date_time(9:))
          self%date_time%string = '['//date_time_start(1:4)//'/'//date_time_start(5:6)//'/'//date_time_start(7:8)//      &
