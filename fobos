@@ -1,5 +1,5 @@
 [modes]
-modes = shared-gnu static-gnu shared-gnu-debug static-gnu-debug
+modes = static-gnu shared-gnu shared-gnu-debug static-gnu-debug
         shared-intel static-intel shared-intel-debug static-intel-debug
         tests-gnu tests-gnu-debug
         tests-intel tests-intel-debug
@@ -264,7 +264,7 @@ rule_3 = rm -f *.gcov
 
 [rule-maketar]
 help = Make tar archive of the project
-rule = tar --xform="s%^%forbear/%" -czf forbear.tar.gz *
+rule = tar --xform="s%%^%%forbear/%%" -czf forbear.tar.gz *
 
 [rule-makecoverage]
 help   = Perform coverage analysis
