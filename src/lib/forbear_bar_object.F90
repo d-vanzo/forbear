@@ -246,7 +246,7 @@ contains
    if (mod(progress, self%frequency) == 0 .or. progress == 100) then
       call system_clock(tic_toc(2), count_rate)
       f_chars = nint(progress / 100._R8P * self%width)
-      bar = achar(27)//'[?25l' ! hide cursor
+      !bar = achar(27)//'[?25l' ! hide cursor
       bar = bar//self%prefix%output()
       bar = bar//self%bracket_left%output()
       bar = bar//repeat(self%filled_char%output(), f_chars)
@@ -282,10 +282,10 @@ contains
                                  ' '//date_time_start(9:10)//':'//date_time_start(11:12)//':'//date_time_start(13:14)// &
                                ' - '//date_time(1:4)//'/'//date_time(5:6)//'/'//date_time(7:8)//                        &
                                  ' '//date_time(9:10)//':'//date_time(11:12)//':'//date_time(13:14)//']'
-         write(stdout, '(A)') achar(27)//'[?25h' ! restore cursor
+         write(stdout, '(A)') '' !achar(27)//'[?25h' ! restore cursor
          write(stdout, '(A)') self%date_time%output()
       else
-         write(stdout, '(A)') achar(27)//'[?25h'! restore cursor
+         write(stdout, '(A)') '' !achar(27)//'[?25h'! restore cursor
       endif
       self%is_stdout_locked_ = .false.
    endif
